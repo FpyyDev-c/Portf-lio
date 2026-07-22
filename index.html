@@ -1,616 +1,422 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Breno Germano — Desenvolvedor Full Stack & Bots Discord</title>
-<meta name="description" content="Breno Germano, desenvolvedor full stack especializado em bots para Discord, automações e sistemas personalizados.">
+<title>Breno Germano | Portfolio</title>
+<meta name="description" content="Breno Germano - Desenvolvedor Full Stack, especializado em bots para Discord, automações e sistemas sob medida.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0a0d13;
-    --bg-alt: #0e1219;
-    --panel: #11161f;
-    --panel-2: #151b26;
-    --border: #212938;
-    --text: #e7eaf1;
-    --muted: #7d8798;
-    --accent: #4fd1c5;
-    --accent-dim: #2c7d75;
-    --amber: #f2a65a;
-    --red: #ef6461;
+    --primary:#7c3aed;
+    --primary-light:#a78bfa;
+    --content2:#18181b;
+    --content4:#3f3f46;
+    --dim:rgba(255,255,255,.5);
+    --border:rgba(255,255,255,.1);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:'Inter',sans-serif;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-  ::selection{background:var(--accent);color:#0a0d13;}
-
+  body{background:#000;color:#fff;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
   a{color:inherit;text-decoration:none;}
-  .mono{font-family:'JetBrains Mono',monospace;}
-  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
+  .vibes{font-family:'Great Vibes',cursive;font-weight:300;letter-spacing:.02em;}
+  ul{list-style:none;}
+  svg{display:block;}
 
-  .bg-grid{
-    position:fixed;inset:0;z-index:-2;
-    background-image:
-      linear-gradient(rgba(79,209,197,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(79,209,197,0.05) 1px, transparent 1px);
-    background-size:44px 44px;
-    mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-    animation:gridDrift 30s linear infinite;
-  }
-  @keyframes gridDrift{
-    from{background-position:0 0, 0 0;}
-    to{background-position:44px 44px, 44px 44px;}
-  }
-  .glow{
-    position:fixed;top:-200px;left:50%;transform:translateX(-50%);
-    width:900px;height:600px;z-index:-1;
-    background:radial-gradient(circle, rgba(79,209,197,0.14) 0%, transparent 70%);
-    pointer-events:none;
-    animation:glowPulse 8s ease-in-out infinite;
-  }
-  @keyframes glowPulse{
-    0%,100%{opacity:.8;transform:translateX(-50%) scale(1);}
-    50%{opacity:1;transform:translateX(-50%) scale(1.08);}
-  }
+  .bg-fx{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 60% 45% at 50% 0%, rgba(124,58,237,.22), transparent 70%);}
 
-  /* cursor-follow spotlight */
-  .cursor-glow{
-    position:fixed;width:420px;height:420px;border-radius:50%;z-index:-1;
-    background:radial-gradient(circle, rgba(79,209,197,0.06) 0%, transparent 70%);
-    transform:translate(-50%,-50%);pointer-events:none;
-    transition:opacity .3s ease;left:0;top:0;opacity:0;
+  /* NAV */
+  nav.pillnav{
+    position:sticky;top:20px;z-index:50;max-width:1024px;margin:20px auto 0;
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(10px);border-radius:999px;padding:0 1.5rem;height:4rem;
+  }
+  .brand{font-size:1.05rem;font-weight:400;}
+  .navlinks{display:flex;gap:1.6rem;align-items:center;}
+  .navlinks li{position:relative;font-size:.85rem;}
+  .navlinks a{position:relative;padding-bottom:3px;color:rgba(255,255,255,.85);}
+  .navlinks a::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--primary-light);transition:width .3s cubic-bezier(.65,0,.35,1);}
+  .navlinks a:hover::after{width:100%;}
+  .navtoggle{display:none;background:none;border:0;color:#fff;font-size:1.4rem;cursor:pointer;}
+
+  /* BADGE eyebrow (igual ao site: pill translúcida com ícone) */
+  .eyebrow-badge{
+    font-size:.85rem;color:var(--dim);background:rgba(255,255,255,.05);
+    padding:.5rem 1.5rem;border-radius:999px;border:2px solid rgba(255,255,255,.1);
+    display:flex;align-items:center;gap:.5rem;width:fit-content;margin:0 auto 1.5rem;
   }
 
-  #netCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55;}
+  /* HERO */
+  main.hero{position:relative;z-index:10;margin-top:5rem;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 1rem 2rem;}
+  .split-heading{display:flex;align-items:baseline;justify-content:center;gap:.6rem;flex-wrap:wrap;}
+  .split-heading .vibes{font-size:clamp(2rem,6.5vw,4.6rem);color:#fff;}
+  .split-heading .bold{font-size:clamp(1.6rem,5.5vw,4rem);font-weight:600;}
+  .role-line{font-size:clamp(1.3rem,4vw,3rem);font-weight:600;margin-top:-.3rem;}
 
-  /* ---------- NAV ---------- */
-  header{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:18px 6vw;
-    backdrop-filter:blur(10px);
-    background:rgba(10,13,19,0.7);
-    border-bottom:1px solid transparent;
-    transition:border-color .3s ease, background .3s ease;
-  }
-  header.scrolled{border-color:var(--border);background:rgba(10,13,19,0.92);}
-  .logo{
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;
-    display:flex;align-items:center;gap:8px;
-  }
-  .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);}
-  nav ul{list-style:none;display:flex;gap:2.2rem;}
-  nav a{
-    font-size:.85rem;color:var(--muted);font-family:'JetBrains Mono',monospace;
-    transition:color .25s ease;position:relative;padding-bottom:3px;
-  }
-  nav a::after{
-    content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--accent);
-    transition:width .3s cubic-bezier(.65,0,.35,1);
-  }
-  nav a:hover, nav a:focus-visible{color:var(--accent);}
-  nav a:hover::after, nav a:focus-visible::after{width:100%;}
-  nav a::before{content:'./';color:var(--accent-dim);}
-  .nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:8px;font-size:1.1rem;cursor:pointer;}
+  .word{display:inline-block;opacity:0;filter:blur(10px);animation:wordIn .8s ease forwards;}
+  .up{transform:translateY(-40px);}
+  .down{transform:translateY(40px);}
+  @keyframes wordIn{to{opacity:1;filter:blur(0);transform:translateY(0);}}
+  @keyframes fadeblur{from{opacity:0;filter:blur(10px);}to{opacity:1;filter:blur(0);}}
 
-  /* ---------- HERO / TERMINAL ---------- */
-  .hero{
-    min-height:100vh;
-    display:flex;flex-direction:column;justify-content:center;
-    padding:120px 6vw 60px;
-    position:relative;
-  }
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent);
-    display:flex;align-items:center;gap:.6rem;margin-bottom:1.4rem;opacity:0;
-    animation:fadeUp .7s ease forwards .1s;
-  }
-  .eyebrow .bar{width:28px;height:1px;background:var(--accent);}
-  .hero h1{
-    font-size:clamp(2.2rem, 6vw, 4.4rem);font-weight:700;line-height:1.05;
-    max-width:900px;opacity:0;animation:fadeUp .7s ease forwards .25s;
-  }
-  .hero h1 span{color:var(--accent);}
-  .hero-sub{
-    margin-top:1.6rem;max-width:640px;color:var(--muted);font-size:1.05rem;
-    opacity:0;animation:fadeUp .7s ease forwards .4s;
-  }
-  .hero-cta{
-    margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap;
-    opacity:0;animation:fadeUp .7s ease forwards .55s;
-  }
-  .btn{
-    padding:.85rem 1.6rem;border-radius:8px;font-weight:600;font-size:.92rem;
-    display:inline-flex;align-items:center;gap:.5rem;transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .btn-primary{background:var(--accent);color:#06110f;}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(79,209,197,0.5);}
-  .btn-ghost{border:1px solid var(--border);color:var(--text);}
-  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2rem;}
+  .btn{padding:.85rem 1.6rem;border-radius:14px;font-size:.9rem;font-weight:500;display:inline-flex;align-items:center;gap:.5rem;transition:transform .2s ease, opacity .2s ease;cursor:pointer;border:none;}
+  .btn:hover{transform:translateY(-2px);opacity:.92;}
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:0 12px 28px -6px rgba(124,58,237,.55);}
+  .btn-outline{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(6px);}
 
-  .terminal{
-    margin-top:3.6rem;max-width:640px;
-    background:var(--panel);border:1px solid var(--border);border-radius:12px;
-    overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
-    opacity:0;animation:fadeUp .8s ease forwards .7s;
+  /* MARQUEE de tecnologias - devagar, igual solicitado */
+  .loop-wrap{
+    max-width:900px;margin:2.5rem auto 0;position:relative;overflow:hidden;height:56px;
+    -webkit-mask-image:linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image:linear-gradient(to right, transparent, black 12%, black 88%, transparent);
   }
-  .term-bar{
-    display:flex;align-items:center;gap:6px;padding:.7rem 1rem;background:var(--panel-2);
-    border-bottom:1px solid var(--border);
-  }
-  .term-bar span{width:10px;height:10px;border-radius:50%;}
-  .term-bar span:nth-child(1){background:#ef6461;}
-  .term-bar span:nth-child(2){background:#f2a65a;}
-  .term-bar span:nth-child(3){background:#4fd1c5;}
-  .term-title{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);}
-  .term-body{padding:1.2rem 1.3rem;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--muted);min-height:130px;}
-  .term-body .line{color:var(--text);}
-  .term-body .prompt{color:var(--accent);}
-  .caret{display:inline-block;width:8px;height:1em;background:var(--accent);vertical-align:text-bottom;animation:blink 1s step-end infinite;}
+  .loop-track{display:flex;width:max-content;animation:loopScroll 110s linear infinite;gap:2.6rem;align-items:center;}
+  .loop-track span{display:inline-flex;align-items:center;gap:.45rem;font-size:.85rem;white-space:nowrap;color:rgba(255,255,255,.55);}
+  .loop-track span svg{width:1.15em;height:1.15em;filter:grayscale(1) opacity(.55);transition:filter .2s ease;}
+  .loop-track span:hover svg{filter:grayscale(0) opacity(1);}
+  @keyframes loopScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-  @keyframes blink{50%{opacity:0;}}
+  /* SECTIONS */
+  section{max-width:1024px;margin:0 auto;padding:7rem 1.5rem;position:relative;z-index:5;}
+  .sec-heading{margin-bottom:2.5rem;}
 
-  /* ---------- SECTION SHELL ---------- */
-  section{padding:8rem 6vw;max-width:1180px;margin:0 auto;position:relative;}
-  .sec-head{margin-bottom:3rem;}
-  .sec-cmd{
-    font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.85rem;margin-bottom:.8rem;
-    display:flex;align-items:center;gap:.5rem;
-  }
-  .sec-cmd::before{content:'$';color:var(--muted);}
-  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);}
-  .sec-head p{color:var(--muted);margin-top:.7rem;max-width:620px;}
-
-  .reveal{
-    opacity:0;transform:translateY(28px);filter:blur(6px);
-    transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1), filter .8s ease;
-  }
+  .reveal{opacity:0;transform:translateY(28px);filter:blur(8px);transition:all .8s cubic-bezier(.16,1,.3,1);}
   .reveal.in{opacity:1;transform:translateY(0);filter:blur(0);}
 
-  .stagger.in > *{animation:staggerUp .7s cubic-bezier(.16,1,.3,1) both;}
-  .stagger.in > *:nth-child(1){animation-delay:.05s;}
-  .stagger.in > *:nth-child(2){animation-delay:.12s;}
-  .stagger.in > *:nth-child(3){animation-delay:.19s;}
-  .stagger.in > *:nth-child(4){animation-delay:.26s;}
-  .stagger.in > *:nth-child(5){animation-delay:.33s;}
-  .stagger.in > *:nth-child(6){animation-delay:.4s;}
-  @keyframes staggerUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-  /* ---------- ABOUT ---------- */
-  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:3.5rem;align-items:start;}
-  .about-grid p{color:#c7cddb;margin-bottom:1.1rem;}
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-  .stat{
-    background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.4rem;
+  /* PROFILE CARD (usado em Sobre e Contato, igual ao original) */
+  .profile-card{
+    position:sticky;top:96px;z-index:10;display:flex;flex-wrap:wrap;align-items:center;
+    justify-content:space-between;gap:1.5rem;
+    background:linear-gradient(to bottom, var(--content2), transparent);
+    backdrop-filter:blur(6px);padding:1rem;border-radius:14px 14px 0 0;
   }
-  .stat b{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;color:var(--accent);display:block;}
-  .stat span{color:var(--muted);font-size:.82rem;}
+  .profile-left{display:flex;align-items:center;gap:1rem;}
+  .avatar{width:80px;height:80px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 3px rgba(124,58,237,.4);flex-shrink:0;background:var(--content2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:600;color:var(--primary-light);}
+  .profile-name-row{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;}
+  .profile-name-row h1{font-size:1.4rem;font-weight:600;color:rgba(255,255,255,.85);}
+  .status-pill{background:rgba(21,128,61,.35);padding:.25rem .75rem;border:1px solid rgba(21,128,61,.7);border-radius:999px;display:flex;align-items:center;gap:.4rem;}
+  .status-dot{position:relative;width:6px;height:6px;background:#22c55e;border-radius:50%;}
+  .status-dot::after{content:'';position:absolute;inset:-3px;background:#22c55e;border-radius:50%;animation:ping 1.6s cubic-bezier(0,0,.2,1) infinite;}
+  @keyframes ping{75%,100%{transform:scale(2.2);opacity:0;}}
+  .status-pill span{font-size:.72rem;color:#22c55e;}
+  .profile-role{color:var(--dim);font-size:.85rem;margin-top:.2rem;}
+  .profile-right{display:flex;flex-direction:column;gap:.5rem;align-items:flex-end;}
+  .loc-row{display:flex;align-items:center;gap:.4rem;color:var(--dim);font-size:.78rem;}
+  .icon-btns{display:flex;gap:.5rem;}
+  .icon-btn{width:40px;height:40px;border-radius:10px;background:var(--content2);display:flex;align-items:center;justify-content:center;transition:opacity .2s ease;border:1px solid transparent;}
+  .icon-btn:hover{opacity:.7;}
+  .icon-btn svg{width:16px;height:16px;}
 
-  /* ---------- SKILLS ---------- */
-  .lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem 2.4rem;}
-  .lang-row{}
-  .lang-top{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.5rem;}
-  .lang-top .lvl{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.75rem;}
-  .bar-track{height:6px;border-radius:4px;background:var(--panel-2);border:1px solid var(--border);overflow:hidden;}
-  .bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent-dim),var(--accent));width:0;transition:width 1.1s cubic-bezier(.16,1,.3,1);}
+  .bio-card{padding:1px;background:linear-gradient(to right, rgba(255,255,255,.1), rgba(255,255,255,.5), rgba(255,255,255,.1));border-radius:0 0 14px 14px;}
+  .bio-inner{background:rgba(0,0,0,.8);backdrop-filter:blur(6px);border-radius:0 0 14px 14px;padding:2.2rem 1.4rem;display:flex;flex-direction:column;gap:1rem;}
+  .bio-inner p{color:var(--dim);font-size:.92rem;text-align:justify;line-height:1.7;}
+  .bio-inner strong{color:rgba(255,255,255,.85);font-weight:600;text-decoration:underline;filter:brightness(.9);}
 
-  /* ---------- TECH ---------- */
-  .tech-cloud{display:flex;flex-wrap:wrap;gap:.7rem;}
-  .pill{
-    font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--text);
-    border:1px solid var(--border);background:var(--panel);
-    padding:.55rem 1rem;border-radius:999px;transition:all .25s ease;
-  }
-  .pill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);}
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.5rem;justify-items:center;margin-top:2.5rem;}
+  .proj-card{max-width:480px;width:100%;}
+  .proj-thumb{width:100%;height:230px;background:var(--content2);border-radius:14px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+  .proj-thumb .badge-new{position:absolute;top:12px;left:12px;z-index:2;background:#dc2626;color:#fff;font-size:.62rem;font-weight:700;padding:.15rem .6rem;border-radius:999px;text-transform:uppercase;letter-spacing:.05em;}
+  .proj-thumb .glyph{font-size:2.6rem;opacity:.4;}
+  .proj-card h3{font-size:1.4rem;margin:1rem 0 .5rem;}
+  .proj-role{color:#a1a1aa;font-weight:600;font-size:.85rem;margin-bottom:.6rem;}
+  .proj-card p{color:var(--dim);font-size:.85rem;text-align:justify;margin-bottom:.9rem;}
+  .proj-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
+  .proj-tags span{background:var(--content2);border-radius:999px;padding:.3rem .8rem;font-size:.65rem;color:#e4e4e7;}
+  .proj-btns{display:flex;gap:.5rem;}
+  .proj-btn{height:32px;padding:0 .8rem;border-radius:8px;font-size:.7rem;display:inline-flex;align-items:center;gap:.4rem;background:var(--content2);color:#fff;}
+  .proj-btn.site{background:#4c1d95;}
+  .proj-btn svg{width:14px;height:14px;}
 
-  /* ---------- PROJECTS ---------- */
-  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.6rem;perspective:1000px;}
-  .card{
-    background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1.8rem;
-    transition:transform .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, box-shadow .35s ease;
-    display:flex;flex-direction:column;position:relative;overflow:hidden;
-    transform-style:preserve-3d;will-change:transform;
-  }
-  .card::before{
-    content:'';position:absolute;inset:0;border-radius:14px;padding:1px;
-    background:linear-gradient(135deg, rgba(79,209,197,0.5), transparent 40%);
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;mask-composite:exclude;
-    opacity:0;transition:opacity .35s ease;pointer-events:none;
-  }
-  .card:hover{border-color:var(--accent-dim);box-shadow:0 24px 48px -24px rgba(79,209,197,0.25);}
-  .card:hover::before{opacity:1;}
-  .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
-  .status{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);}
-  .status i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
-  .card h3{font-size:1.2rem;margin-bottom:.6rem;}
-  .card p{color:var(--muted);font-size:.92rem;margin-bottom:1.2rem;flex-grow:1;}
-  .tag-row{display:flex;flex-wrap:wrap;gap:.5rem;}
-  .tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--amber);border:1px solid rgba(242,166,90,0.3);background:rgba(242,166,90,0.06);padding:.3rem .6rem;border-radius:6px;}
+  /* FAQ accordion */
+  .faq{width:100%;}
+  .faq-item{border-bottom:1px solid var(--content4);}
+  .faq-btn{width:100%;background:none;border:none;color:#fff;padding:1rem .5rem;display:flex;align-items:center;gap:.75rem;cursor:pointer;text-align:left;font-family:inherit;font-size:.95rem;}
+  .faq-btn svg{width:16px;height:16px;color:#a1a1aa;flex-shrink:0;}
+  .faq-btn .chev{margin-left:auto;transition:transform .25s ease;}
+  .faq-item.open .chev{transform:rotate(-90deg);}
+  .faq-panel{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-item.open .faq-panel{max-height:200px;}
+  .faq-panel p{padding:0 .5rem 1.2rem 2.4rem;color:var(--dim);font-size:.85rem;line-height:1.6;}
 
-  /* ---------- SERVICES ---------- */
-  .serv-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-  .serv-item{background:var(--panel);padding:1.6rem 1.8rem;display:flex;gap:1rem;align-items:flex-start;transition:background .25s ease;}
-  .serv-item:hover{background:var(--panel-2);}
-  .serv-num{font-family:'JetBrains Mono',monospace;color:var(--accent-dim);font-size:.8rem;padding-top:2px;}
-  .serv-item h4{font-size:1rem;margin-bottom:.3rem;}
-  .serv-item p{color:var(--muted);font-size:.85rem;}
+  .contact-main{display:flex;gap:2.5rem;align-items:flex-start;margin-top:3rem;flex-wrap:wrap;}
+  .contact-left{flex:1 1 380px;}
+  .contact-right{flex:1 1 300px;}
 
-  /* ---------- CONTACT ---------- */
-  .contact-box{
-    background:var(--panel);border:1px solid var(--border);border-radius:16px;
-    padding:3rem 2.5rem;text-align:center;position:relative;overflow:hidden;
-  }
-  .contact-box::before{
-    content:'';position:absolute;inset:0;
-    background:radial-gradient(circle at 50% 0%, rgba(79,209,197,0.12), transparent 60%);
-  }
-  .contact-box h2{font-size:clamp(1.6rem,4vw,2.3rem);position:relative;}
-  .contact-box p{color:var(--muted);max-width:520px;margin:1rem auto 2rem;position:relative;}
-  .contact-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;}
-
-  footer{
-    text-align:center;padding:2.5rem 6vw;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.78rem;
-    border-top:1px solid var(--border);
-  }
+  footer{text-align:center;padding:3rem 1.5rem;color:var(--dim);font-size:.8rem;}
 
   @media (max-width:820px){
-    .about-grid{grid-template-columns:1fr;}
-    nav ul{position:fixed;top:64px;right:0;left:0;background:rgba(10,13,19,0.98);flex-direction:column;padding:1.5rem 6vw;gap:1.2rem;border-bottom:1px solid var(--border);transform:translateY(-130%);transition:transform .3s ease;}
-    nav ul.open{transform:translateY(0);}
-    .nav-toggle{display:block;}
+    .navlinks{position:fixed;top:5.5rem;left:1rem;right:1rem;flex-direction:column;background:rgba(0,0,0,.97);border:1px solid var(--border);border-radius:20px;padding:1.5rem;gap:1rem;transform:translateY(-20px);opacity:0;pointer-events:none;transition:all .3s ease;}
+    .navlinks.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+    .navtoggle{display:block;}
+    .proj-grid{grid-template-columns:1fr;}
+    .profile-card{flex-direction:column;align-items:flex-start;}
+    .profile-right{align-items:flex-start;}
   }
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:.001s !important;transition-duration:.001s !important;}
-  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.001s !important;transition-duration:.001s !important;}}
 </style>
 </head>
 <body>
 
-<div class="bg-grid"></div>
-<div class="glow"></div>
+<div class="bg-fx"></div>
 
-<header id="header">
-  <div class="logo"><span class="dot"></span>breno<span style="color:var(--muted)">.dev</span></div>
-  <nav>
-    <ul id="navList">
-      <li><a href="#sobre">sobre</a></li>
-      <li><a href="#habilidades">habilidades</a></li>
-      <li><a href="#tecnologias">stack</a></li>
-      <li><a href="#projetos">projetos</a></li>
-      <li><a href="#servicos">servicos</a></li>
-      <li><a href="#contato">contato</a></li>
-    </ul>
-  </nav>
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">☰</button>
-</header>
+<nav class="pillnav">
+  <div class="brand">Breno Germano</div>
+  <ul class="navlinks" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#sobre">Sobre mim</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="#contatos">Contatos</a></li>
+  </ul>
+  <button class="navtoggle" id="navToggle" aria-label="menu">☰</button>
+</nav>
 
-<section class="hero" id="topo">
-  <canvas id="netCanvas"></canvas>
-  <div class="eyebrow"><span class="bar"></span> DESENVOLVEDOR FULL STACK · BOTS DISCORD · AUTOMAÇÕES</div>
-  <h1>Breno Germano constrói<br>sistemas que <span>rodam sozinhos</span>.</h1>
-  <p class="hero-sub">8 anos criando bots, automações, sites e integrações sob medida. Da ideia ao deploy, entrego soluções estáveis, seguras e prontas para escalar.</p>
-  <div class="hero-cta">
-    <a href="#contato" class="btn btn-primary">Falar com Breno →</a>
-    <a href="#projetos" class="btn btn-ghost">Ver projetos</a>
+<main class="hero" id="home">
+  <div class="eyebrow-badge" style="opacity:0;animation:fadeblur 1s ease forwards .1s;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"></circle><circle cx="19" cy="5" r="1"></circle><circle cx="5" cy="5" r="1"></circle><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle><circle cx="12" cy="19" r="1"></circle><circle cx="19" cy="19" r="1"></circle><circle cx="5" cy="19" r="1"></circle></svg>
+    Seja bem vindo ao meu site!
   </div>
 
-  <div class="terminal">
-    <div class="term-bar"><span></span><span></span><span></span><div class="term-title">breno@dev — zsh</div></div>
-    <div class="term-body" id="termBody"></div>
+  <p class="split-heading">
+    <span class="vibes word up" style="animation-delay:.2s">Breno</span>
+    <span class="vibes word up" style="animation-delay:.32s">Germano</span>
+  </p>
+  <p class="role-line">
+    <span class="word down" style="animation-delay:.5s">Seu</span>
+    <span class="word down" style="animation-delay:.6s">desenvolvedor</span>
+    <span class="word down" style="animation-delay:.7s">fullstack.</span>
+  </p>
+
+  <div class="hero-actions" style="opacity:0;animation:fadeblur 1s ease forwards .9s;">
+    <a href="#contatos" class="btn btn-primary">Entre em contato</a>
+    <a href="#sobre" class="btn btn-outline">Sobre mim</a>
   </div>
-</section>
+
+  <div class="loop-wrap">
+    <div class="loop-track" id="loopTrack"></div>
+  </div>
+</main>
 
 <section id="sobre">
-  <div class="sec-head reveal">
-    <div class="sec-cmd">whoami</div>
-    <h2>Sobre mim</h2>
+  <div class="eyebrow-badge reveal">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3 8 9l4 13 4-13-2.5-6"></path><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z"></path><path d="M2 9h20"></path></svg>
+    Sobre mim
   </div>
-  <div class="about-grid reveal">
-    <div>
-      <p>Sou desenvolvedor com 8 anos de experiência, especializado na criação de bots para Discord, sistemas automatizados, sites e soluções personalizadas.</p>
-      <p>Trabalho com diversas tecnologias e estou sempre estudando novas linguagens e ferramentas — o objetivo é sempre o mesmo: resolver problemas reais através de código bem estruturado.</p>
-      <p>Já desenvolvi projetos próprios, bots com milhares de interações e sistemas completos de automação, sempre com foco em qualidade, organização e suporte contínuo.</p>
-    </div>
-    <div class="stat-grid stagger">
-      <div class="stat"><b data-count="8" data-suffix="+">0</b><span>anos de experiência</span></div>
-      <div class="stat"><b data-count="13">0</b><span>linguagens de programação</span></div>
-      <div class="stat"><b data-count="3">0</b><span>bots Discord em produção</span></div>
-      <div class="stat"><b data-count="100" data-suffix="%">0</b><span>foco em soluções sob medida</span></div>
-    </div>
-  </div>
-</section>
+  <p class="split-heading reveal">
+    <span class="vibes">Quem</span><span class="bold">sou eu?</span>
+  </p>
+  <p class="role-line reveal" style="margin-bottom:2rem;">O que eu faço?</p>
 
-<section id="habilidades">
-  <div class="sec-head reveal">
-    <div class="sec-cmd">cat linguagens.json</div>
-    <h2>Habilidades</h2>
-    <p>Nível de domínio por linguagem de programação.</p>
+  <div class="profile-card reveal">
+    <div class="profile-left">
+      <div class="avatar">BG</div>
+      <div>
+        <div class="profile-name-row">
+          <h1>Breno Germano</h1>
+          <div class="status-pill"><span class="status-dot"></span><span>Disponível</span></div>
+        </div>
+        <p class="profile-role">Desenvolvedor Fullstack</p>
+      </div>
+    </div>
+    <div class="profile-right">
+      <div class="loc-row">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>Brasil</span>
+      </div>
+      <div class="icon-btns">
+        <a class="icon-btn" href="https://wa.me/5511964593428" target="_blank" rel="noopener" title="WhatsApp">
+          <svg viewBox="0 0 256 259" fill="none"><path d="m67.663 221.823 4.185 2.093c17.44 10.463 36.971 15.346 56.503 15.346 61.385 0 111.609-50.224 111.609-111.609 0-29.297-11.859-57.897-32.785-78.824-20.927-20.927-48.83-32.785-78.824-32.785-61.385 0-111.61 50.224-110.912 112.307 0 20.926 6.278 41.156 16.741 58.594l2.79 4.186-11.16 41.156 41.853-10.464Z" fill="#25D366"></path><path d="M219.033 37.668C195.316 13.254 162.531 0 129.048 0 57.898 0 .698 57.897 1.395 128.35c0 22.322 6.278 43.947 16.742 63.478L0 258.096l67.663-17.439c18.834 10.464 39.76 15.347 60.688 15.347 70.453 0 127.653-57.898 127.653-128.35 0-34.181-13.254-66.269-36.97-89.986Z" fill="#25D366"></path></svg>
+        </a>
+        <a class="icon-btn" href="tel:+5511964593428" title="Ligar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="lang-grid reveal stagger" id="langGrid"></div>
-</section>
 
-<section id="tecnologias">
-  <div class="sec-head reveal">
-    <div class="sec-cmd">ls tecnologias/</div>
-    <h2>Tecnologias & Ferramentas</h2>
-    <p>Stack utilizada no dia a dia para construir, integrar e manter sistemas.</p>
-  </div>
-  <div class="tech-cloud reveal stagger">
-    <span class="pill">Node.js</span>
-    <span class="pill">Discord.js</span>
-    <span class="pill">APIs REST</span>
-    <span class="pill">SQL</span>
-    <span class="pill">MongoDB</span>
-    <span class="pill">Git & GitHub</span>
-    <span class="pill">HTML</span>
-    <span class="pill">CSS</span>
-    <span class="pill">Automação de processos</span>
-    <span class="pill">Integrações de sistemas</span>
-    <span class="pill">Aplicações web</span>
+  <div class="bio-card reveal">
+    <div class="bio-inner">
+      <p>Programo há <strong>8 anos.</strong> Comecei mexendo em bots para servidores de Discord por conta própria e fui expandindo para <strong>automações, sites e sistemas sob encomenda.</strong></p>
+      <p>Uso principalmente Python e JavaScript no dia a dia, mas já passei por <strong>outras 11 linguagens</strong> conforme o projeto pedia — prefiro entender o problema antes de escolher a ferramenta.</p>
+      <p>Hoje mantenho <strong>três bots próprios em produção</strong> e atendo projetos de terceiros, sempre lidando direto com o cliente do orçamento ao suporte pós-entrega.</p>
+    </div>
   </div>
 </section>
 
 <section id="projetos">
-  <div class="sec-head reveal">
-    <div class="sec-cmd">ps --list-projects</div>
-    <h2>Projetos</h2>
-    <p>Bots e sistemas em produção, construídos do zero.</p>
+  <div class="eyebrow-badge reveal">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+    Projetos
   </div>
-  <div class="proj-grid reveal stagger">
-    <div class="card">
-      <div class="card-top"><h3 style="margin:0;">Sentinel Guard Bot</h3><div class="status"><i></i>online</div></div>
+  <p class="split-heading reveal"><span class="bold">O que eu já fiz?</span></p>
+  <p class="role-line reveal">Meus <span class="vibes">trabalhos</span></p>
+
+  <div class="proj-grid reveal">
+    <div class="proj-card">
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#1b1330,#0e0a1a);">
+        <span class="badge-new">Novo</span>
+        <span class="glyph">🛡️</span>
+      </div>
+      <h3>Sentinel Guard Bot</h3>
+      <div class="proj-role">Desenvolvedor Backend</div>
       <p>Bot avançado de proteção para servidores Discord, com sistema anti-raid, segurança automática, defesa contra ataques, gerenciamento de permissões e ferramentas administrativas.</p>
-      <div class="tag-row"><span class="tag">Python</span><span class="tag">Discord API</span><span class="tag">Banco de Dados</span></div>
+      <div class="proj-tags"><span>Python</span><span>Discord API</span><span>Banco de Dados</span></div>
+      <div class="proj-btns">
+        <span class="proj-btn"><svg viewBox="0 0 1024 1024" fill="#fff"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)"></path></svg>Código privado</span>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-top"><h3 style="margin:0;">NovaWave Bot</h3><div class="status"><i></i>online</div></div>
-      <p>Bot de entretenimento com comandos divertidos, sistemas de interação, economia virtual, jogos e recursos pensados para aumentar o engajamento da comunidade.</p>
-      <div class="tag-row"><span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">Discord.js</span></div>
+
+    <div class="proj-card">
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#131a30,#0a0e1a);">
+        <span class="glyph">🎮</span>
+      </div>
+      <h3>NovaWave Bot</h3>
+      <div class="proj-role">Desenvolvedor Fullstack</div>
+      <p>Bot de entretenimento com comandos divertidos, sistemas de interação, economia virtual, jogos e recursos para aumentar a participação dos membros da comunidade.</p>
+      <div class="proj-tags"><span>JavaScript</span><span>Node.js</span><span>Discord.js</span></div>
+      <div class="proj-btns">
+        <span class="proj-btn"><svg viewBox="0 0 1024 1024" fill="#fff"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)"></path></svg>Código privado</span>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-top"><h3 style="margin:0;">RealmQuest RPG</h3><div class="status"><i></i>online</div></div>
+
+    <div class="proj-card">
+      <div class="proj-thumb" style="background:linear-gradient(135deg,#1c1420,#0e0a10);">
+        <span class="glyph">⚔️</span>
+      </div>
+      <h3>RealmQuest RPG</h3>
+      <div class="proj-role">Desenvolvedor Backend</div>
       <p>Bot de RPG para Discord com sistema de níveis, personagens, batalhas, missões, itens, economia e progressão completa dos jogadores.</p>
-      <div class="tag-row"><span class="tag">Python</span><span class="tag">Banco de Dados</span><span class="tag">APIs</span></div>
+      <div class="proj-tags"><span>Python</span><span>Banco de Dados</span><span>APIs</span></div>
+      <div class="proj-btns">
+        <span class="proj-btn"><svg viewBox="0 0 1024 1024" fill="#fff"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(64)"></path></svg>Código privado</span>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="servicos">
-  <div class="sec-head reveal">
-    <div class="sec-cmd">man servicos</div>
-    <h2>Serviços</h2>
-    <p>O que posso construir e manter para você ou sua empresa.</p>
+<section id="contatos">
+  <div class="eyebrow-badge reveal">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+    Contatos
   </div>
-  <div class="serv-list reveal stagger">
-    <div class="serv-item"><span class="serv-num">01</span><div><h4>Bots personalizados para Discord</h4><p>Do zero, sob medida para o seu servidor e sua comunidade.</p></div></div>
-    <div class="serv-item"><span class="serv-num">02</span><div><h4>Sistemas automatizados</h4><p>Automação de tarefas, processos e fluxos de trabalho.</p></div></div>
-    <div class="serv-item"><span class="serv-num">03</span><div><h4>Sites e aplicações web</h4><p>Interfaces modernas, responsivas e funcionais.</p></div></div>
-    <div class="serv-item"><span class="serv-num">04</span><div><h4>Integração com APIs</h4><p>Conectando seus sistemas a serviços externos.</p></div></div>
-    <div class="serv-item"><span class="serv-num">05</span><div><h4>Correção de bugs e melhorias</h4><p>Ajustes e otimizações em projetos já existentes.</p></div></div>
-    <div class="serv-item"><span class="serv-num">06</span><div><h4>Manutenção e suporte técnico</h4><p>Acompanhamento contínuo depois da entrega.</p></div></div>
-  </div>
-</section>
+  <p class="split-heading reveal"><span class="bold">Me mostre</span><span class="vibes">suas ideias</span></p>
+  <p class="role-line reveal">Vamos trabalhar juntos?</p>
 
-<section id="contato">
-  <div class="contact-box reveal">
-    <div class="sec-cmd" style="justify-content:center;">connect --to breno</div>
-    <h2>Vamos construir algo juntos?</h2>
-    <p>Disponível para novos projetos, parcerias e oportunidades como desenvolvedor. Chama no WhatsApp e vamos conversar sobre sua ideia.</p>
-    <div class="contact-actions">
-      <a href="https://wa.me/5511964593428" target="_blank" rel="noopener" class="btn btn-primary">WhatsApp: (11) 96459-3428</a>
-      <a href="tel:+5511964593428" class="btn btn-ghost">Ligar agora</a>
+  <div class="contact-main">
+    <div class="contact-left reveal">
+      <div class="profile-card" style="position:static;">
+        <div class="profile-left">
+          <div class="avatar">BG</div>
+          <div>
+            <div class="profile-name-row">
+              <h1>Breno Germano</h1>
+              <div class="status-pill"><span class="status-dot"></span><span>Disponível</span></div>
+            </div>
+            <p class="profile-role">Desenvolvedor Fullstack</p>
+          </div>
+        </div>
+        <div class="profile-right">
+          <div class="loc-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Brasil</span>
+          </div>
+          <div class="icon-btns">
+            <a class="icon-btn" href="https://wa.me/5511964593428" target="_blank" rel="noopener" title="WhatsApp">
+              <svg viewBox="0 0 256 259" fill="none"><path d="m67.663 221.823 4.185 2.093c17.44 10.463 36.971 15.346 56.503 15.346 61.385 0 111.609-50.224 111.609-111.609 0-29.297-11.859-57.897-32.785-78.824-20.927-20.927-48.83-32.785-78.824-32.785-61.385 0-111.61 50.224-110.912 112.307 0 20.926 6.278 41.156 16.741 58.594l2.79 4.186-11.16 41.156 41.853-10.464Z" fill="#25D366"></path><path d="M219.033 37.668C195.316 13.254 162.531 0 129.048 0 57.898 0 .698 57.897 1.395 128.35c0 22.322 6.278 43.947 16.742 63.478L0 258.096l67.663-17.439c18.834 10.464 39.76 15.347 60.688 15.347 70.453 0 127.653-57.898 127.653-128.35 0-34.181-13.254-66.269-36.97-89.986Z" fill="#25D366"></path></svg>
+            </a>
+            <a class="icon-btn" href="tel:+5511964593428" title="Ligar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq" style="margin-top:1.5rem;">
+        <div class="faq-item">
+          <button class="faq-btn" onclick="this.parentElement.classList.toggle('open')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg>
+            Quais minhas principais tecnologias?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 19l-7-7 7-7"></path></svg>
+          </button>
+          <div class="faq-panel"><p>Python, JavaScript e Node.js são minha base do dia a dia. Também trabalho com TypeScript, Java, C#, PHP e outras linguagens dependendo do que o projeto pede.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="this.parentElement.classList.toggle('open')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="10"></circle></svg>
+            Você também trabalha em projetos simples?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 19l-7-7 7-7"></path></svg>
+          </button>
+          <div class="faq-panel"><p>Sim! Desde a correção de um bug pontual até um bot ou sistema completo do zero — me chama e conversamos sobre o escopo.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="this.parentElement.classList.toggle('open')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Qual o prazo médio de um projeto?
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 19l-7-7 7-7"></path></svg>
+          </button>
+          <div class="faq-panel"><p>Varia com a complexidade — um bot simples pode ficar pronto em poucos dias, sistemas maiores levam algumas semanas. Combino prazo com você antes de começar.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right reveal">
+      <div class="bio-card" style="border-radius:14px;">
+        <div class="bio-inner" style="border-radius:14px;">
+          <h3 style="font-size:1.2rem;">Vamos conversar?</h3>
+          <p>Disponível para novos projetos, parcerias e oportunidades como desenvolvedor. Me chama no WhatsApp e explica sua ideia.</p>
+          <a href="https://wa.me/5511964593428" target="_blank" rel="noopener" class="btn btn-primary" style="justify-content:center;">WhatsApp: (11) 96459-3428</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>
-  © 2026 Breno Germano — Desenvolvedor Full Stack. Todos os direitos reservados.
-</footer>
-
-<div class="cursor-glow" id="cursorGlow"></div>
+<footer>© 2026 Breno Germano — Desenvolvedor Full Stack.</footer>
 
 <script>
-  // Cursor-follow spotlight
-  const cursorGlow = document.getElementById('cursorGlow');
-  let cgX = 0, cgY = 0, cgTX = 0, cgTY = 0;
-  window.addEventListener('mousemove', (e) => {
-    cgTX = e.clientX; cgTY = e.clientY;
-    cursorGlow.style.opacity = 1;
-  });
-  window.addEventListener('mouseleave', () => cursorGlow.style.opacity = 0);
-  (function animateGlow(){
-    cgX += (cgTX - cgX) * 0.08;
-    cgY += (cgTY - cgY) * 0.08;
-    cursorGlow.style.left = cgX + 'px';
-    cursorGlow.style.top = cgY + 'px';
-    requestAnimationFrame(animateGlow);
-  })();
-
-  // Node network canvas (hero) — evoca automação e sistemas conectados
-  const canvas = document.getElementById('netCanvas');
-  const ctx = canvas.getContext('2d');
-  const heroSection = document.getElementById('topo');
-  let nodes = [];
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function resizeCanvas(){
-    canvas.width = heroSection.offsetWidth;
-    canvas.height = heroSection.offsetHeight;
-  }
-  function initNodes(){
-    const count = Math.min(60, Math.floor(canvas.width * canvas.height / 22000));
-    nodes = Array.from({length: count}, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      r: Math.random() * 1.6 + 0.6
-    }));
-  }
-  function drawNodes(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for(const n of nodes){
-      n.x += n.vx; n.y += n.vy;
-      if(n.x < 0 || n.x > canvas.width) n.vx *= -1;
-      if(n.y < 0 || n.y > canvas.height) n.vy *= -1;
-    }
-    for(let i = 0; i < nodes.length; i++){
-      for(let j = i + 1; j < nodes.length; j++){
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if(dist < 130){
-          ctx.strokeStyle = `rgba(79,209,197,${(1 - dist/130) * 0.35})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-    for(const n of nodes){
-      ctx.fillStyle = 'rgba(79,209,197,0.85)';
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    if(!prefersReduced) requestAnimationFrame(drawNodes);
-  }
-  resizeCanvas();
-  initNodes();
-  drawNodes();
-  window.addEventListener('resize', () => { resizeCanvas(); initNodes(); });
-
-  // Header scroll state
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
-  });
-
-  // Mobile nav toggle
   const navToggle = document.getElementById('navToggle');
-  const navList = document.getElementById('navList');
-  navToggle.addEventListener('click', () => navList.classList.toggle('open'));
-  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-  // Terminal boot sequence
-  const termBody = document.getElementById('termBody');
-  const lines = [
-    { prompt: true, text: 'iniciar --perfil breno.germano' },
-    { text: '> carregando experiência......... 8 anos' },
-    { text: '> linguagens detectadas.......... 13' },
-    { text: '> bots em produção............... 3' },
-    { prompt: true, text: 'status: disponível para novos projetos' }
-  ];
-  let li = 0;
-  function typeLine(){
-    if(li >= lines.length){
-      termBody.innerHTML += '<span class="caret"></span>';
-      return;
-    }
-    const l = lines[li];
-    const div = document.createElement('div');
-    div.className = 'line';
-    div.innerHTML = (l.prompt ? '<span class="prompt">$ </span>' : '') + '';
-    termBody.appendChild(div);
-    let i = 0;
-    const txt = l.text;
-    const interval = setInterval(() => {
-      div.innerHTML = (l.prompt ? '<span class="prompt">$ </span>' : '') + txt.slice(0, i+1);
-      i++;
-      if(i >= txt.length){
-        clearInterval(interval);
-        li++;
-        setTimeout(typeLine, 220);
-      }
-    }, 18);
-  }
-  setTimeout(typeLine, 900);
+  const techIcons = {
+    'Python': '<svg viewBox="0 0 128 128"><path fill="#3776AB" d="M63.4 0C31 0 33 14 33 14v15h31v4H21S0 30 0 63.5 18 96 18 96h11V80s-1-18 18-18h30s17 1 17-16V17S96 0 63.4 0zM47 9a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/><path fill="#FFD43B" d="M64.6 128c32.4 0 30.4-14 30.4-14v-15H64v-4h43s21 2 21-31.5S110 32 110 32H99v16s1 18-18 18H51S34 65 34 82v29s-2.7 17 30.6 17zM81 119a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg>',
+    'JavaScript': '<svg viewBox="0 0 1052 1052"><path fill="#f0db4f" d="M0 0h1052v1052H0z"/><path d="M965.9 801.1c-7.7-48-39-88.3-131.7-125.9-32.2-14.8-68.1-25.399-78.8-49.8-3.8-14.2-4.3-22.2-1.9-30.8 6.9-27.9 40.2-36.6 66.6-28.6 17 5.7 33.1 18.801 42.8 39.7 45.4-29.399 45.3-29.2 77-49.399-11.6-18-17.8-26.301-25.4-34-27.3-30.5-64.5-46.2-124-45-10.3 1.3-20.699 2.699-31 4-29.699 7.5-58 23.1-74.6 44-49.8 56.5-35.6 155.399 25 196.1 59.7 44.8 147.4 55 158.6 96.9 10.9 51.3-37.699 67.899-86 62-35.6-7.4-55.399-25.5-76.8-58.4-39.399 22.8-39.399 22.8-79.899 46.1 9.6 21 19.699 30.5 35.8 48.7 76.2 77.3 266.899 73.5 301.1-43.5 1.399-4.001 10.6-30.801 3.199-72.101zm-394-317.6h-98.4c0 85-.399 169.4-.399 254.4 0 54.1 2.8 103.7-6 118.9-14.4 29.899-51.7 26.2-68.7 20.399-17.3-8.5-26.1-20.6-36.3-37.699-2.8-4.9-4.9-8.7-5.601-9-26.699 16.3-53.3 32.699-80 49 13.301 27.3 32.9 51 58 66.399 37.5 22.5 87.9 29.4 140.601 17.3 34.3-10 63.899-30.699 79.399-62.199 22.4-41.3 17.6-91.3 17.4-146.6.5-90.2 0-180.4 0-270.9z" fill="#323330"/></svg>',
+    'TypeScript': '<svg viewBox="0 0 256 256"><path d="M20 0h216c11.046 0 20 8.954 20 20v216c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20V20C0 8.954 8.954 0 20 0Z" fill="#3178C6"/><path d="M150.518 200.475v27.62c4.492 2.302 9.805 4.028 15.938 5.179 6.133 1.151 12.597 1.726 19.393 1.726 6.622 0 12.914-.633 18.874-1.899 5.96-1.266 11.187-3.352 15.678-6.257 4.492-2.906 8.048-6.704 10.669-11.394 2.62-4.689 3.93-10.486 3.93-17.391 0-5.006-.749-9.394-2.246-13.163a30.748 30.748 0 0 0-6.479-10.055c-2.821-2.935-6.205-5.567-10.149-7.898-3.945-2.33-8.394-4.531-13.347-6.602-3.628-1.497-6.881-2.949-9.761-4.359-2.879-1.41-5.327-2.848-7.342-4.316-2.016-1.467-3.571-3.021-4.665-4.661-1.094-1.64-1.641-3.495-1.641-5.567 0-1.899.489-3.61 1.468-5.135s2.362-2.834 4.147-3.927c1.785-1.094 3.973-1.942 6.565-2.547 2.591-.604 5.471-.906 8.638-.906 2.304 0 4.737.173 7.299.518 2.563.345 5.14.877 7.732 1.597a53.669 53.669 0 0 1 7.558 2.719 41.7 41.7 0 0 1 6.781 3.797v-25.807c-4.204-1.611-8.797-2.805-13.778-3.582-4.981-.777-10.697-1.165-17.147-1.165-6.565 0-12.784.705-18.658 2.115-5.874 1.409-11.043 3.61-15.506 6.602-4.463 2.993-7.99 6.805-10.582 11.437-2.591 4.632-3.887 10.17-3.887 16.615 0 8.228 2.375 15.248 7.127 21.06 4.751 5.811 11.963 10.731 21.638 14.759a291.458 291.458 0 0 1 10.625 4.575c3.283 1.496 6.119 3.049 8.509 4.66 2.39 1.611 4.276 3.366 5.658 5.265 1.382 1.899 2.073 4.057 2.073 6.474a9.901 9.901 0 0 1-1.296 4.963c-.863 1.524-2.174 2.848-3.93 3.97-1.756 1.122-3.945 1.999-6.565 2.632-2.62.633-5.687.95-9.2.95-5.989 0-11.92-1.05-17.794-3.151-5.875-2.1-11.317-5.25-16.327-9.451Zm-46.036-68.733H140V109H41v22.742h35.345V233h28.137V131.742Z" fill="#FFF"/></svg>',
+    'Java': '<svg viewBox="0 0 256 346"><path d="M83 267s-14 8 9 11c27 3 41 2 71-3 0 0 8 5 19 9-67 29-153-2-99-17M74 230s-15 11 8 13c29 3 52 3 92-4 0 0 6 5 15 8-82 24-173 2-115-17" fill="#5382A1"/><path d="M144 166c17 19-4 36-4 36s42-22 22-49c-18-26-32-38 44-82 0 0-119 29-62 95" fill="#E76F00"/><path d="M233 295s10 8-10 15c-39 12-163 15-197 0-12-5 11-13 18-14l12-2c-14-9-89 19-38 28 138 22 251-10 215-27M89 190s-63 15-22 21c17 2 51 2 83-1 26-2 52-7 52-7l-16 9c-64 16-187 8-151-9 30-14 54-13 54-13M202 253c64-33 34-66 13-61l-7 2s2-3 6-5c41-14 73 43-14 66l2-2" fill="#5382A1"/><path d="M162 0s36 36-34 91c-56 45-12 70 0 99-32-30-56-56-40-80 23-35 89-53 74-110" fill="#E76F00"/><path d="M95 345c62 4 158-3 160-32 0 0-4 11-51 20-53 10-119 9-158 2 0 0 8 7 49 10" fill="#5382A1"/></svg>',
+    'C#': '<svg viewBox="0 0 128 128"><path fill="#9B4F96" d="M117 33.6c0-2-.4-3.8-1.3-5.3-.8-1.4-2.1-2.6-3.8-3.6C97.5 16.2 83 7.8 68.6-.6c-3.8-2.2-7.4-2.1-11.1.1-5.8 3.5-34.9 20.1-43.7 25.2C10 27.6 8 30.6 8 34.5c0 17.1 0 34.2 0 51.3 0 1.9.4 3.6 1.3 5.1.8 1.4 2.1 2.7 3.8 3.7 8.8 5.1 37.9 21.8 43.7 25.2 3.7 2.2 7.3 2.3 11.1.1 14.4-8.4 28.9-16.8 43.3-25.2 1.7-1 3-2.2 3.8-3.7.8-1.5 1.3-3.2 1.3-5.1-.1-17.1-.1-34.2-.1-51.3z"/><path fill="#fff" d="M64.1 90c-14.5 0-26.3-11.8-26.3-26.3 0-14.5 11.8-26.3 26.3-26.3 9.4 0 18.1 5 22.9 13.2l-11.4 6.6c-2.4-4.1-6.8-6.7-11.5-6.7-7.4 0-13.4 6-13.4 13.4S56.7 77.3 64.1 77.3c4.8 0 9.1-2.6 11.5-6.7l11.4 6.6C82.3 85 73.5 90 64.1 90z"/></svg>',
+    'C++': '<svg viewBox="0 0 128 128"><path fill="#00599C" d="M115.4 30.7 67.1 2.9c-1.9-1.1-4.2-1.1-6.1 0L12.7 30.7c-1.9 1.1-3.1 3.2-3.1 5.4v55.7c0 2.2 1.2 4.3 3.1 5.4l48.3 27.9c1.9 1.1 4.2 1.1 6.1 0l48.3-27.9c1.9-1.1 3.1-3.2 3.1-5.4V36.1c0-2.2-1.2-4.2-3.1-5.4z"/><path fill="#fff" d="M64 90.4c-14.6 0-26.4-11.8-26.4-26.4S49.4 37.6 64 37.6c9.4 0 17.6 4.9 22.3 12.3l19.2-11.1C97 26.6 81.6 17.6 64 17.6c-25.6 0-46.4 20.8-46.4 46.4S38.4 110.4 64 110.4c17.5 0 32.8-9.7 40.7-24l-19.3-11.1C80.7 84.9 73 90.4 64 90.4z"/></svg>',
+    'PHP': '<svg viewBox="0 0 128 128"><ellipse cx="64" cy="64" rx="64" ry="40" fill="#8892BF"/><text x="64" y="72" font-family="Georgia,serif" font-size="34" fill="#fff" text-anchor="middle" font-style="italic">php</text></svg>',
+    'Node.js': '<svg viewBox="0 0 256 292"><path fill="#539E43" d="M134.923 1.832c-4.344-2.443-9.502-2.443-13.846 0L6.787 67.801C2.443 70.244 0 74.859 0 79.745v132.208c0 4.887 2.715 9.502 6.787 11.945l114.29 65.968c4.344 2.444 9.502 2.444 13.846 0l114.29-65.968c4.344-2.443 6.787-7.058 6.787-11.945V79.745c0-4.886-2.715-9.501-6.787-11.944z"/></svg>',
+    'Discord.js': '<svg viewBox="0 0 256 199"><path fill="#5865F2" d="M216.856 16.597A208.5 208.5 0 0 0 164.042 0c-2.275 4.113-4.933 9.645-6.766 14.046-19.692-2.961-39.203-2.961-58.533 0-1.832-4.4-4.55-9.933-6.846-14.046a207.809 207.809 0 0 0-52.855 16.638C5.618 67.147-3.443 116.4 1.087 164.956c22.169 16.555 43.653 26.612 64.775 33.193A161.094 161.094 0 0 0 79.735 175.3a136.413 136.413 0 0 1-21.846-10.632 108.636 108.636 0 0 0 5.356-4.237c42.122 19.702 87.89 19.702 129.51 0a131.66 131.66 0 0 0 5.355 4.237 136.07 136.07 0 0 1-21.886 10.653c4.006 8.02 8.638 15.67 13.873 22.848 21.142-6.58 42.646-16.637 64.815-33.213 5.316-56.288-9.08-105.09-38.092-148.36ZM85.474 135.095c-12.645 0-23.015-11.805-23.015-26.18s10.149-26.2 23.015-26.2c12.867 0 23.236 11.804 23.015 26.2.02 14.375-10.148 26.18-23.015 26.18Zm85.052 0c-12.645 0-23.015-11.805-23.015-26.18s10.15-26.2 23.015-26.2c12.867 0 23.236 11.804 23.015 26.2 0 14.375-10.148 26.18-23.015 26.18Z"/></svg>',
+    'MongoDB': '<svg viewBox="0 0 256 549"><path fill="#01EC64" d="M175.622 61.108C152.612 33.807 132.797 6.078 128.749.32a1.03 1.03 0 0 0-1.492 0c-4.048 5.759-23.863 33.487-46.874 60.788-197.507 251.896 31.108 421.89 31.108 421.89l1.917 1.28c1.704 26.234 5.966 63.988 5.966 63.988h17.045s4.26-37.54 5.965-63.987l1.918-1.494c.213.214 228.828-169.78 31.32-421.677Z"/></svg>',
+    'Git': '<svg viewBox="0 0 256 256"><path d="M251.17 116.6 139.4 4.82a16.49 16.49 0 0 0-23.31 0l-23.21 23.2 29.44 29.45a19.57 19.57 0 0 1 24.8 24.96l28.37 28.38a19.61 19.61 0 1 1-11.75 11.06L137.28 95.4v69.64a19.62 19.62 0 1 1-16.13-.57V94.2a19.61 19.61 0 0 1-10.65-25.73L81.46 39.44 4.83 116.08a16.49 16.49 0 0 0 0 23.32L116.6 251.17a16.49 16.49 0 0 0 23.32 0l111.25-111.25a16.5 16.5 0 0 0 0-23.33" fill="#DE4C36"/></svg>',
+    'GitHub': '<svg viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" transform="scale(1.5)" fill="#fff"/></svg>',
+    'HTML5': '<svg viewBox="0 0 452 520"><path fill="#e34f26" d="M41 460L0 0h451l-41 460-185 52"/><path fill="#ef652a" d="M226 472l149-41 35-394H226"/><path fill="#ecedee" d="M226 208h-75l-5-58h80V94H84l15 171h127zm0 147l-64-17-4-45h-56l7 89 117 32z"/><path fill="#fff" d="M226 265h69l-7 73-62 17v59l115-32 16-174H226zm0-171v56h136l5-56z"/></svg>',
+    'CSS3': '<svg viewBox="0 0 512 512"><path fill="#264de4" d="M71.357 460.819 30.272 0h451.456l-41.129 460.746L255.724 512z"/><path fill="#2965f1" d="m405.388 431.408 35.148-393.73H256v435.146z"/><path fill="#ebebeb" d="m124.46 208.59 5.065 56.517H256V208.59zm-5.041-57.875H256V94.197H114.281zM256 355.372l-.248.066-62.944-16.996-4.023-45.076h-56.736l7.919 88.741 115.772 32.14.26-.073z"/><path fill="#fff" d="M255.805 208.59v56.517H325.4l-6.56 73.299-63.035 17.013v58.8l115.864-32.112.85-9.549 13.28-148.792 1.38-15.176 10.203-114.393H255.805v56.518h79.639L330.3 208.59z"/></svg>',
+    'Go': '<svg viewBox="0 0 128 128"><path fill="#00ACD7" d="M9.5 68.5c-.2 0-.3-.1-.2-.3l1.4-1.8c.1-.2.4-.3.6-.3h24.6c.2 0 .3.1.2.3l-1.1 1.7c-.1.2-.4.4-.5.4z"/><path fill="#00ACD7" d="M78 66.5c-4.3 1.1-7.3 2-11.5 3.1-1 .3-1.1.3-2-.7-1-1.2-1.8-1.9-3.3-2.6-4.4-2.2-8.6-1.5-12.6 1.1-4.7 3-7.2 7.5-7.1 13.1.1 5.6 3.9 10.2 9.4 11 4.8.6 8.8-1 12-4.7.6-.8 1.2-1.6 1.9-2.6H50.6c-1.4 0-1.7-.9-1.3-2 .8-1.9 2.2-5.1 3.1-6.7.2-.4.6-1 1.5-1h24.7c-.1 1.8-.1 3.5-.4 5.3-.7 4.7-2.5 9.1-5.5 12.9-4.8 6.2-11 10-19 11.1-6.5.9-12.6-.3-17.9-4.3-4.9-3.8-7.7-8.8-8.4-14.9-.9-7.3 1.2-13.9 5.6-19.7 4.8-6.2 11.1-10.1 18.9-11.5 6.3-1.1 12.4-.3 17.9 3.4 3.6 2.3 6.2 5.5 7.9 9.4.4.6.1 1-.7 1.2z"/></svg>',
+    'Rust': '<svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="58" fill="none" stroke="#000" stroke-width="6"/><circle cx="64" cy="64" r="26" fill="none" stroke="#000" stroke-width="6"/></svg>',
+    'Kotlin': '<svg viewBox="0 0 128 128"><linearGradient id="kt" x1="15.9" y1="126.4" x2="112.1" y2="15.9" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1B95E0"/><stop offset=".47" stop-color="#8C3EAF"/><stop offset="1" stop-color="#F8642B"/></linearGradient><path fill="url(#kt)" d="M112 112H16V16h96L64 64z"/></svg>',
+    'Swift': '<svg viewBox="0 0 128 128"><path fill="#F05138" d="M99.7 92.8c-11.7 8-27.9 12.9-45.7 12.9C31.8 105.7 12.3 94.9.5 78c9.6 7.9 22.1 12.6 35.6 12.6 8.9 0 17.3-2.1 24.7-5.8-12.8-6.1-22.4-16.8-28.6-30 4.5 4.7 20.7 22 43.8 22 5.2 0 10.4-.6 15.3-1.9C68.1 65 55.9 41.5 55.9 41.5c30.5 27.8 65.7 26.5 65.7 26.5s-2.9-.8-6.3-2.7c-13.5-7.4-21.2-16.9-21.2-16.9-9.5-13.7-15.1-30.9-15.1-30.9 5.3 8.1 24.6 26.7 40.5 33.3 6.6 15.6 3.5 33.4-19.8 42z"/></svg>',
+    'Ruby': '<svg viewBox="0 0 128 128"><path fill="#CC342D" d="M25 108 4 65l84-56 40 34z"/><path fill="#fff" d="m40 84 8-30 34 6z"/></svg>',
+    'SQL': '<svg viewBox="0 0 128 128"><ellipse cx="64" cy="24" rx="50" ry="16" fill="#336791"/><path fill="#336791" d="M14 24v80c0 8.8 22.4 16 50 16s50-7.2 50-16V24H14z"/><ellipse cx="64" cy="24" rx="50" ry="16" fill="#4a90c4"/></svg>'
+  };
+  const techOrder = ['Discord.js','MongoDB','Git','GitHub','HTML5','CSS3','Python','JavaScript','TypeScript','Java','C#','C++','PHP','Node.js','Go','Rust','Kotlin','Swift','Ruby','SQL'];
+  const track = document.getElementById('loopTrack');
+  track.innerHTML = [...techOrder, ...techOrder].map(t => `<span>${techIcons[t]}${t}</span>`).join('');
 
-  // Language skill bars
-  const languages = [
-    { name: 'Python', level: 92, label: 'Avançado' },
-    { name: 'JavaScript', level: 90, label: 'Avançado' },
-    { name: 'TypeScript', level: 68, label: 'Intermediário' },
-    { name: 'Java', level: 62, label: 'Intermediário' },
-    { name: 'C#', level: 60, label: 'Intermediário' },
-    { name: 'PHP', level: 58, label: 'Intermediário' },
-    { name: 'C++', level: 45, label: 'Básico/Intermediário' },
-    { name: 'C', level: 35, label: 'Básico' },
-    { name: 'Go', level: 32, label: 'Básico' },
-    { name: 'Rust', level: 30, label: 'Básico' },
-    { name: 'Kotlin', level: 28, label: 'Básico' },
-    { name: 'Swift', level: 28, label: 'Básico' },
-    { name: 'Ruby', level: 26, label: 'Básico' },
-  ];
-  const langGrid = document.getElementById('langGrid');
-  languages.forEach(lang => {
-    const row = document.createElement('div');
-    row.className = 'lang-row';
-    row.innerHTML = `
-      <div class="lang-top"><span>${lang.name}</span><span class="lvl">${lang.label}</span></div>
-      <div class="bar-track"><div class="bar-fill" data-level="${lang.level}"></div></div>
-    `;
-    langGrid.appendChild(row);
-  });
-
-  // Card 3D tilt on hover
-  if(!prefersReduced){
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const rx = ((y / rect.height) - 0.5) * -8;
-        const ry = ((x / rect.width) - 0.5) * 8;
-        card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-      });
-    });
-  }
-
-  // Animated number counters for stats
-  function animateCount(el){
-    const target = parseInt(el.dataset.count, 10);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1200;
-    const start = performance.now();
-    function step(now){
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if(progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  // Scroll reveal + bar animation + counters
   const revealEls = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
+      if (entry.isIntersecting) {
         entry.target.classList.add('in');
-        entry.target.querySelectorAll('.bar-fill').forEach(bar => {
-          bar.style.width = bar.dataset.level + '%';
-        });
-        entry.target.querySelectorAll('[data-count]').forEach(animateCount);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
   revealEls.forEach(el => observer.observe(el));
 </script>
 
